@@ -1,16 +1,20 @@
 @extends('admin.layouts.admin-layout')
 
 @section('title', 'Preview Representative')
-
 @section('content')
+    <style>
+        .btn:hover .hint{
+            display: block !important
+        }
+    </style>
 <h3 class="mb-5">
     المندوبين
 </h3>
 <div class="card w-100" id="word_prev">
     <div class="card-header d-flex justify-content-between gap-3">
-        <input type="text" name="search" id="search" class="form-control w-25" placeholder="Search" v-model="search" @input="getSearch(this.search)">
+        <input type="text" name="search" id="search" class="form-control w-25" placeholder="بحث" v-model="search" @input="getSearch(this.search)">
         <a href="{{route('add.reprsentative')}}" class="btn btn-primary w-fit d-flex gap-2 align-items-center">
-            <i class="ti ti-plus"></i> اضافة مقالة
+            <i class="ti ti-plus"></i> اضافة مندوب
         </a>
     </div>
     <div class="card-body p-4">
@@ -50,10 +54,22 @@
                 <td class="border-bottom-0"><h6 class="fw-semibold mb-0">@{{reprsentative.email}}</h6></td>
                 <td class="border-bottom-0">
                     <div class="d-flex gap-2">
-                        <a :href="`/add-cheque/${reprsentative.id}`" class="btn btn-dark p-2"><h4 class="ti ti-script-plus text-light m-0 fw-semibold"></h4></a>
-                        <a :href="`/edit-reprsentative/${reprsentative.id}`" class="btn btn-secondary p-2"><h4 class="ti ti-edit text-light m-0 fw-semibold"></h4></a>
-                        <a :href="`/${reprsentative.url}`" target="_blanck" class="btn btn-success p-2"><h4 class="ti ti-eye text-light m-0 fw-semibold"></h4></a>
-                        <button class="btn btn-danger p-2" @click="this.delete_pop_up = true; getValues(reprsentative.id, reprsentative.name)"><h4 class="ti ti-trash text-light m-0 fw-semibold"></h4></button>
+                        <a :href="`/add-cheque/${reprsentative.id}`" class="btn btn-dark p-2" style="position: relative;">
+                            <h4 class="ti ti-script-plus text-light m-0 fw-semibold"></h4>
+                            <span class="hint" style="display:none;position: absolute;bottom: 120%;background: #8a8a8a;padding: 5px 10px;right: 50%;transform: translateX(50%);border-radius: 5px;z-index: 9999999999;">تحرير شيك</span>
+                        </a>
+                        <a :href="`/edit-reprsentative/${reprsentative.id}`" class="btn btn-secondary p-2" style="position: relative;">
+                            <h4 class="ti ti-edit text-light m-0 fw-semibold"></h4>
+                            <span class="hint" style="display:none;position: absolute;bottom: 120%;background: #8a8a8a;padding: 5px 10px;right: 50%;transform: translateX(50%);border-radius: 5px;z-index: 9999999999;">تعديل بيانات المندوب</span>
+                        </a>
+                        <a :href="`/reprsentative/${reprsentative.id}`" target="_blanck" class="btn btn-success p-2" style="position: relative;">
+                            <h4 class="ti ti-eye text-light m-0 fw-semibold"></h4>
+                            <span class="hint" style="display:none;position: absolute;bottom: 120%;background: #8a8a8a;padding: 5px 10px;right: 50%;transform: translateX(50%);border-radius: 5px;z-index: 9999999999;">عرض سجل المندوب</span>
+                        </a>
+                        <button class="btn btn-danger p-2" @click="this.delete_pop_up = true; getValues(reprsentative.id, reprsentative.name)" style="position: relative;">
+                            <h4 class="ti ti-trash text-light m-0 fw-semibold"></h4>
+                            <span class="hint" style="display:none;position: absolute;bottom: 120%;background: #8a8a8a;padding: 5px 10px;right: 50%;transform: translateX(50%);border-radius: 5px;z-index: 9999999999;">حذف بيانات المندوب</span>
+                        </button>
                     </div>
                 </td>
             </tr>

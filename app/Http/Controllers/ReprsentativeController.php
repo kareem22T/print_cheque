@@ -20,6 +20,11 @@ class ReprsentativeController extends Controller
         
         return $this->jsonData(true, '', [], $Reprsentatives);
     }
+    public function prev($id) {
+        $Reprsentative = Reprsentative::with("cheques")->find($id);
+        
+        return view('show_reprsentative')->with(compact('Reprsentative'));
+    }
 
     public function search(Request $request) {
         $byNames = Reprsentative::orderBy(\DB::raw('ABS(TIMESTAMPDIFF(SECOND, created_at, NOW()))'))->where('name', 'like', '%' . $request->search_words . '%')->paginate(10);
@@ -95,9 +100,12 @@ class ReprsentativeController extends Controller
         }
 
         $Reprsentative = Reprsentative::find($request->reprsentative_id);
+        foreach ($Reprsentative->cheques() as $cheque) {
+            $cheque->delete();
+        }
         $Reprsentative->delete();
 
         if ($Reprsentative)
-            return $this->jsonData(true, $request->file_name . 'تم حف بيانات المندوب بنجاح', [], []);
+            return $this->jsonData(true, $request->file_name . 'تم حف الشيك بنجاح', [], []);
     }
 }

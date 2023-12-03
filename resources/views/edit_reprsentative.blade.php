@@ -1,5 +1,5 @@
 @extends('admin.layouts.admin-layout')
-@section('title', 'Print Check | Edit reprsentative')
+@section('title', 'Print Cheque | Edit reprsentative')
 @section('content')
 @if($Reprsentative)
 <h1>

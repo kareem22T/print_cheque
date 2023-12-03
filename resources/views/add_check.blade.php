@@ -10,12 +10,12 @@
         <div class="form-group mb-3">
             <label for="bank_list" class="label mb-2" style="font-weight: 600; font-size: 18px">اختر البنك</label>
             <select id="bank_list" style="width:160px" class="form-control w-50" v-model="banck">
-                <option value="NBE">البنك الأهلي المصري</option>
-                <option value="CIB">البنك التجاري الدولي 1</option>
-                <option value="CIB3">البنك التجاري الدولي 2</option>
-                <option value="CIB2">البنك التجاري الدولي - Wealth</option>
-                <option value="QNB">بنك قطر الوطني</option>
-                <option value="qnb3">بنك قطر الوطني الأهلي</option>
+                <option value="NBE">البنك الأهلي المصري</option> {{-- done --}}
+                <option value="CIB">البنك التجاري الدولي 1</option> {{-- done --}}
+                <option value="CIB3">البنك التجاري الدولي 2</option> {{-- done --}}
+                <option value="CIB2">البنك التجاري الدولي - Wealth</option> {{-- done --}}
+                <option value="QNB">بنك قطر الوطني</option> {{-- done --}}
+                <option value="qnb3">بنك قطر الوطني الأهلي</option> {{-- done --}}
                 <option value="UNB">بنك الاتحاد الوطني</option>
                 <option value="AUB">البنك الأهلي المتحد</option>
                 <option value="AUB2">البنك الأهلي المتحد 2</option>
@@ -88,15 +88,18 @@
         </div>
 
         {{-- NBE Cheque  --}}
-        <div class="cheque_wrapper" v-if="banck == 'NBE'" id="NBE" style="width: fit-content;margin: 2rem 0;border: 1px solid #dcdcdc; padding: 1rem; border-radius: 1rem">
-            <div class="cheque" style="position: relative">
+        <div class="cheque_wrapper" id="cheque_wrapper" v-if="banck == 'NBE'" id="NBE" style="width: fit-content;margin: 2rem 0;border: 1px solid #dcdcdc; padding: 1rem; border-radius: 1rem">
+            <div class="cheque" style="position: relative;overflow: hidden; width: min-content;margin: auto">
                 <img src="{{asset('/imgs/NBE_cheque.jpg')}}" alt="NBE_cheque" style="width: 630px; max-width: 630px;">
                 <p class="name" style="position: absolute;top: 80px;left: 50%;transform: translateX(-50%);z-index: 999999;color: #000;font-weight: 700;font-size: 18px;margin: 0;">@{{ name }}</p>
-                <p class="date" style="position: absolute; top: 53px; right: 41px;  z-index: 999999; color: rgb(0, 0, 0); font-weight: 600; font-size: 12px; margin: 0px;">@{{ NBE_cheque_date }}</p>
-                <p class="place" style="position: absolute; top: 53px; right: 142px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 600; font-size: 12px; margin: 0px;">@{{ NBE_place_cheque }}</p>
-                <p class="num_price" style="position: absolute; top: 53px; right: 142px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 600; font-size: 12px; margin: 0px;">@{{ NBE_price_num_cheque }}</p>
-                <p class="num_price" style="position: absolute; top: 53px; right: 142px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 600; font-size: 12px; margin: 0px;">@{{ NBE_price_num_cheque }}</p>
-                <p class="currency" style="position: absolute; top: 130px; right: 161px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 17px; margin: 0px;">@{{ currency_cheque }}</p>
+                <p class="date" style="position: absolute; top: 53px; right: 41px;  z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 12px; margin: 0px;">@{{ new Date(NBE_cheque_date).getDate() + "-" +  (new Date(NBE_cheque_date).getMonth() + 1) + "-" + new Date(NBE_cheque_date).getFullYear()}}</p>
+                <p class="place" style="position: absolute; top: 53px; right: 142px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 12px; margin: 0px;">@{{ NBE_place_cheque }}</p>
+                <p class="num_price" style="position: absolute; top: 130px; right: 20px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 16px; margin: 0px;width: 132px;text-align: center;">#@{{ NBE_price_num_cheque }}#</p>
+                <p class="currency" style="position: absolute; top: 132px; right: 156px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 15px; margin: 0px;width: 40px;text-align: center;">@{{ currency_cheque }}</p>
+                <p class="text_price" v-if="NBE_price_text_cheque"  style="position: absolute; top: 115px; right: 250px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 12px; margin: 0px; width: 310px; text-align: center;">فقط @{{ NBE_price_text_cheque }} @{{ currency_cheque_text }} لا غير</p>
+                <p class="reason" style="position: absolute; top: 142px; right: 210px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 13px; margin: 0px; width: 390px; text-align: center;">@{{ NBE_reason_cheque }} </p>
+                <p class="location" style="position: absolute; top: 174px; right: 70px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 13px; margin: 0px; width: 220px; text-align: center;">@{{ NBE_location_cheque }} </p>
+                <p class="underline" v-if="NBE_underline_cheque"  style="font-size: 13px;text-align: center;padding: 4px;border-top: 2px solid black;border-bottom: 2px solid black;z-index: 300;transform: rotate(-45deg);position: absolute;top: 80px;left: 0;transform-origin: left top;min-width: 120px;font-size: 13px;color: #000;font-weight: 700;">@{{ NBE_underline_cheque }} </p>
             </div>
         </div>
         <div class="d-flex gap-2"  v-if="banck == 'NBE'">
@@ -138,7 +141,7 @@
             </div>
             <div class="form-group mb-3 w-50"  v-if="banck == 'NBE'">
                 <label for="currency_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">العملة</label>
-                <select id="currency_cheque" style="width:170px" class="form-control w-100" v-model="currency_cheque">
+                <select id="currency_cheque" style="width:170px" class="form-control w-100" v-model="currency_cheque" @change="handleCurrencyChequeChange()">
                     <option value="JOD" en_cur="Jordanian Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="فلس" cur_div2="Fils" cur_fr="1000" ar_cur="دينار اردني" ar_cur2="ديناراً أردنياً">دينار اردني</option>
                     <option value="IQD" en_cur="Iraqi Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="فلس" cur_div2="Fils" cur_fr="1000" ar_cur="دينار عراقي" ar_cur2="ديناراً عراقياً">دينار عراقي</option>
                     <option value="BHD" en_cur="Bahraini Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="فلس" cur_div2="Fils" cur_fr="1000" ar_cur="دينار بحريني" ar_cur2="ديناراً بحرينياً">دينار بحريني</option>
@@ -168,7 +171,388 @@
         {{-- NBE Cheque  --}}
         {{-- ################################################################  --}}
 
-        <button class="btn btn-primary w-25" @click="add()">اضافة الشيك</button>
+        {{-- CIB Cheque  --}}
+        <div class="cheque_wrapper" id="cheque_wrapper" v-if="banck == 'CIB'" id="CIB" style="width: fit-content;margin: 2rem 0;border: 1px solid #dcdcdc; padding: 1rem; border-radius: 1rem">
+            <div class="cheque" style="position: relative;overflow: hidden; width: min-content;margin: auto">
+                <img src="{{asset('/imgs/CIB_cheque.jpg')}}" alt="CIB_cheque" style="width: 630px; max-width: 630px;">
+                <p class="name" style="position: absolute; top: 80px; right: 180px;  z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 18px; margin: 0px;width: 330px;text-align: center;">@{{ name }}</p>
+                <p class="date" style="position: absolute; top: 50px; left: 85px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 12px; margin: 0px;">@{{ new Date(CIB_cheque_date).getDate() + "-" +  (new Date(CIB_cheque_date).getMonth() + 1) + "-" + new Date(CIB_cheque_date).getFullYear()}}</p>
+                <p class="num_price" style="position: absolute; top: 125px; right: 50px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 16px; margin: 0px; width: 115px; text-align: center;">#@{{ CIB_price_num_cheque }}#</p>
+                <p class="currency" style="position: absolute; top: 128px; right: 165px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 15px; margin: 0px; width: 50px; text-align: center;background: #ffffff5c;">@{{ currency_cheque }}</p>
+                <p class="text_price" v-if="CIB_price_text_cheque"  style="position: absolute; top: 125px; right: 280px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 12px; margin: 0px; width: 300px; text-align: center;">فقط @{{ CIB_price_text_cheque }} @{{ currency_cheque_text }} لا غير</p>
+                <p class="reason" style="position: absolute; top: 162px; right: 300px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 13px; margin: 0px; width: 310px; text-align: center;">@{{ CIB_reason_cheque }} </p>
+                <p class="location" style="position: absolute; top: 177px; right: 40px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 13px; margin: 0px; width: 230px; text-align: center;">@{{ CIB_location_cheque }} </p>
+                <p class="underline" v-if="CIB_underline_cheque"  style="font-size: 13px;text-align: center;padding: 4px;border-top: 2px solid black;border-bottom: 2px solid black;z-index: 300;transform: rotate(-45deg);position: absolute;top: 80px;left: 0;transform-origin: left top;min-width: 120px;font-size: 13px;color: #000;font-weight: 700;">@{{ CIB_underline_cheque }} </p>
+            </div>
+        </div>
+        <div class="d-flex gap-2"  v-if="banck == 'CIB'">
+            <div class="form-group mb-3 w-50"  v-if="banck == 'CIB'">
+                <label for="CIB_date_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">تاريخ الشيك</label>
+                <input type="date" name="CIB_date_cheque" id="CIB_date_cheque" class="form-control" v-model="CIB_cheque_date">
+            </div>
+        </div>
+        <div class="d-flex gap-2" v-if="banck == 'CIB'">
+            <div class="form-group mb-3 w-50"  v-if="banck == 'CIB'">
+                <label for="CIB_price_num_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">المبلغ بالارقام</label>
+                <input type="number" name="CIB_price_num_cheque" id="CIB_price_num_cheque" class="form-control" v-model="CIB_price_num_cheque">
+            </div>
+            <div class="form-group mb-3 w-50"  v-if="banck == 'CIB'">
+                <label for="CIB_price_text_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">المبلغ بالاحرف</label>
+                <input type="text" name="CIB_price_text_cheque" id="CIB_price_text_cheque" class="form-control" v-model="CIB_price_text_cheque">
+            </div>
+        </div>
+        <div class="d-flex gap-2" v-if="banck == 'CIB'">
+            <div class="form-group mb-3 w-50"  v-if="banck == 'CIB'">
+                <label for="CIB_reason_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">وذلك لقاء</label>
+                <textarea name="CIB_reason_cheque" id="CIB_reason_cheque" class="form-control" v-model="CIB_reason_cheque">
+                </textarea>
+            </div>
+            <div class="form-group mb-3 w-50"  v-if="banck == 'CIB'">
+                <label for="CIB_location_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px"> اسم موقع الشيك</label>
+                <input type="text" name="CIB_location_cheque" id="CIB_location_cheque" class="form-control" v-model="CIB_location_cheque">
+            </div>
+        </div>
+
+        <div class="d-flex gap-2" v-if="banck == 'CIB'">
+            <div class="form-group mb-3 w-50"  v-if="banck == 'CIB'">
+                <label for="CIB_underline_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">التسطير</label>
+                <input type="text" name="CIB_underline_cheque" id="CIB_underline_cheque" class="form-control" v-model="CIB_underline_cheque">
+            </div>
+            <div class="form-group mb-3 w-50"  v-if="banck == 'CIB'">
+                <label for="currency_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">العملة</label>
+                <select id="currency_cheque" style="width:170px" class="form-control w-100" v-model="currency_cheque" @change="handleCurrencyChequeChange()">
+                    <option value="JOD" en_cur="Jordanian Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="فلس" cur_div2="Fils" cur_fr="1000" ar_cur="دينار اردني" ar_cur2="ديناراً أردنياً">دينار اردني</option>
+                    <option value="IQD" en_cur="Iraqi Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="فلس" cur_div2="Fils" cur_fr="1000" ar_cur="دينار عراقي" ar_cur2="ديناراً عراقياً">دينار عراقي</option>
+                    <option value="BHD" en_cur="Bahraini Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="فلس" cur_div2="Fils" cur_fr="1000" ar_cur="دينار بحريني" ar_cur2="ديناراً بحرينياً">دينار بحريني</option>
+                    <option value="KWD" en_cur="Kuwaiti Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="فلس" cur_div2="Fils" cur_fr="1000" ar_cur="دينار كويتي" ar_cur2="ديناراً كويتياً">دينار كويتي</option>
+                    <option value="LYD" en_cur="Libyan Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="درهم" cur_div2="dirham" cur_fr="1000" ar_cur="دينار ليبي" ar_cur2="ديناراً ليبياً">دينار ليبي</option>
+                    <option value="DZD" en_cur="Algerian Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="سنتيم" cur_div2="centime" cur_fr="100" ar_cur="دينار جزائري" ar_cur2="ديناراً جزائرياً">دينار جزائري</option>
+                    <option value="TND" en_cur="Tunisian Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="مليم" cur_div2="millime" cur_fr="1000" ar_cur="دينار تونسي" ar_cur2="ديناراً تونسياً">دينار تونسي</option>
+                    <option value="AED" en_cur="UAE Dirham" short_cur_en="Dirham" short_cur="درهم" cur_div="فلس" cur_div2="Fils" cur_fr="100" ar_cur="درهم إماراتي" ar_cur2="درهماً إماراتياً">درهم إماراتي</option>
+                    <option value="MAD" en_cur="Moroccan Dirham" short_cur_en="Dirham" short_cur="درهم" cur_div="سنتيم" cur_div2="centime" cur_fr="100" ar_cur="درهم مغربي" ar_cur2="درهماً مغربياً">درهم مغربي</option>
+                    <option value="SAR" en_cur="Saudi Riyal" short_cur_en="Riyal" short_cur="ريال" cur_div="هللة" cur_div2="halala" cur_fr="100" ar_cur="ريال سعودي" ar_cur2="ريالاً سعودياً">ريال سعودي</option>
+                    <option value="QAR" en_cur="Qatari Rial" short_cur_en="Riyal" short_cur="ريال" cur_div="درهم" cur_div2="dirham" cur_fr="100" ar_cur="ريال قطري" ar_cur2="ريالاً قطرياً">ريال قطري</option>
+                    <option value="YER" en_cur="Yemeni Rial" short_cur_en="Riyal" short_cur="ريال" cur_div="فلس" cur_div2="Fils" cur_fr="100" ar_cur="ريال يمني" ar_cur2="ريالاً يمنياً">ريال يمني</option>
+                    <option value="OMR" en_cur="Rial Omani" short_cur_en="Riyal" short_cur="ريال" cur_div="بيسة" cur_div2="baisa" cur_fr="1000" ar_cur="ريال عماني" ar_cur2="ريالاً عمانياً">ريال عماني</option>
+                    <option value="EGP" en_cur="Egyptian Pound" short_cur_en="Pound" short_cur="جنيه" cur_div="قرش" cur_div2="piasters" cur_fr="100" ar_cur="جنيه مصري" ar_cur2="جنيهاً مصرياً">جنيه مصري</option>
+                    <option value="SDG" en_cur="Sudanese Pound" short_cur_en="Pound" short_cur="جنيه" cur_div="قرش" cur_div2="piasters" cur_fr="100" ar_cur="جنيه سوداني" ar_cur2="جنيهاً سودانياً">جنيه سوداني</option>
+                    <option value="SYP" en_cur="Syrian Pound" short_cur_en="Pound" short_cur="ليرة" cur_div="قرش" cur_div2="piasters" cur_fr="100" ar_cur="ليرة سورية" ar_cur2="ليرة سورية">ليرة سورية</option>
+                    <option value="USD" en_cur="US Dollar" short_cur_en="Dollar" short_cur="دولار" cur_div="سنت" cur_div2="cent" cur_fr="100" ar_cur="دولار أمريكي" ar_cur2="دولاراً أمريكياً">دولار أمريكي</option>
+                    <option value="EUR" en_cur="Euro" short_cur_en="Euro" short_cur="يورو" cur_div="سنت" cur_div2="cent" cur_fr="100" ar_cur="يورو" ar_cur2="يورو">يورو</option>
+                    <option value="GBP" en_cur="GBP" short_cur_en="Pound" short_cur="باوند" cur_div="بنس" cur_div2="pence" cur_fr="100" ar_cur="جنيه استرليني" ar_cur2="جنيهاً إسترلينياً">جنيه استرليني</option>
+                    <option value="Fdj" en_cur="Fdj" short_cur_en="Franc" short_cur="فرنك" cur_div="سنتيم" cur_div2="centime" cur_fr="100" ar_cur="فرنك جيبوتي" ar_cur2="فرنكاً جيبوتياً">فرنك جيبوتي</option>
+                    <option value="CAD" en_cur="CA Dollar" short_cur_en="Dollar" short_cur="دولار" cur_div="سنت" cur_div2="cent" cur_fr="100" ar_cur="دولار كندي" ar_cur2="دولاراً كندياً">دولار كندي</option>
+                    <option value="PHP" en_cur="piso" short_cur_en="piso" short_cur="بيزو" cur_div="سنتيم" cur_div2="sentimo" cur_fr="100" ar_cur="بيزو فلبيني" ar_cur2="بيزو فلبيني">بيزو فلبيني</option>
+                    <option value="ILS" en_cur="Shekel" short_cur_en="Shekel" short_cur="شيقل" cur_div="أغورة" cur_div2="agura" cur_fr="100" ar_cur="شيقل" ar_cur2="شيقل">شيقل</option>
+                </select>
+            </div>
+        </div>
+        {{-- CIB Cheque  --}}
+        {{-- ################################################################  --}}
+
+        {{-- CIB3 Cheque  --}}
+        <div class="cheque_wrapper" id="cheque_wrapper" v-if="banck == 'CIB3'" id="CIB3" style="width: fit-content;margin: 2rem 0;border: 1px solid #dcdcdc; padding: 1rem; border-radius: 1rem">
+            <div class="cheque" style="position: relative;overflow: hidden; width: min-content;margin: auto">
+                <img src="{{asset('/imgs/CIB3_cheque.jpg')}}" alt="CIB3_cheque" style="width: 624px; max-width: 630px;">
+                <p class="name" style="position: absolute; top: 72px; right: 140px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 18px; margin: 0px; width: 410px; text-align: center;">@{{ name }}</p>
+                <p class="date" dir="ltr"  style="position: absolute; top: 19px; right: 40px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 15px; margin: 0px; letter-spacing: 6px;">@{{ new Date(CIB3_cheque_date).getDate() + "" +  (new Date(CIB3_cheque_date).getMonth() + 1) + "" + new Date(CIB3_cheque_date).getFullYear()}}</p>
+                <p class="num_price" style="position: absolute; top: 124px; right: 20px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 16px; margin: 0px; width: 100px; text-align: center;">#@{{ CIB3_price_num_cheque }}#</p>
+                <p class="currency" style="position: absolute; top: 124px; right: 125px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 14px; margin: 0px; width: 30px; text-align: center; background: rgba(255, 255, 255, 0.36) none repeat scroll 0% 0%;">@{{ currency_cheque }}</p>
+                <p class="text_price" v-if="CIB3_price_text_cheque"  style="position: absolute; top: 107px; right: 220px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 12px; margin: 0px; width: 340px; text-align: center;">فقط @{{ CIB3_price_text_cheque }} @{{ currency_cheque_text }} لا غير</p>
+                <p class="reason" style="position: absolute; top: 135px; right: 190px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 12px; margin: 0px; width: 400px; text-align: center;">@{{ CIB3_reason_cheque }} </p>
+                <p class="location" style="position: absolute; top: 153px; right: 70px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 13px; margin: 0px; width: 190px; text-align: center;">@{{ CIB3_location_cheque }} </p>
+                <p class="underline" v-if="CIB3_underline_cheque"  style="font-size: 13px;text-align: center;padding: 4px;border-top: 2px solid black;border-bottom: 2px solid black;z-index: 300;transform: rotate(-45deg);position: absolute;top: 80px;left: 0;transform-origin: left top;min-width: 120px;font-size: 13px;color: #000;font-weight: 700;">@{{ CIB3_underline_cheque }} </p>
+            </div>
+        </div>
+        <div class="d-flex gap-2"  v-if="banck == 'CIB3'">
+            <div class="form-group mb-3 w-50"  v-if="banck == 'CIB3'">
+                <label for="CIB3_date_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">تاريخ الشيك</label>
+                <input type="date" name="CIB3_date_cheque" id="CIB3_date_cheque" class="form-control" v-model="CIB3_cheque_date">
+            </div>
+        </div>
+        <div class="d-flex gap-2" v-if="banck == 'CIB3'">
+            <div class="form-group mb-3 w-50"  v-if="banck == 'CIB3'">
+                <label for="CIB3_price_num_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">المبلغ بالارقام</label>
+                <input type="number" name="CIB3_price_num_cheque" id="CIB3_price_num_cheque" class="form-control" v-model="CIB3_price_num_cheque">
+            </div>
+            <div class="form-group mb-3 w-50"  v-if="banck == 'CIB3'">
+                <label for="CIB3_price_text_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">المبلغ بالاحرف</label>
+                <input type="text" name="CIB3_price_text_cheque" id="CIB3_price_text_cheque" class="form-control" v-model="CIB3_price_text_cheque">
+            </div>
+        </div>
+        <div class="d-flex gap-2" v-if="banck == 'CIB3'">
+            <div class="form-group mb-3 w-50"  v-if="banck == 'CIB3'">
+                <label for="CIB3_reason_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">وذلك لقاء</label>
+                <textarea name="CIB3_reason_cheque" id="CIB3_reason_cheque" class="form-control" v-model="CIB3_reason_cheque">
+                </textarea>
+            </div>
+            <div class="form-group mb-3 w-50"  v-if="banck == 'CIB3'">
+                <label for="CIB3_location_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px"> اسم موقع الشيك</label>
+                <input type="text" name="CIB3_location_cheque" id="CIB3_location_cheque" class="form-control" v-model="CIB3_location_cheque">
+            </div>
+        </div>
+
+        <div class="d-flex gap-2" v-if="banck == 'CIB3'">
+            <div class="form-group mb-3 w-50"  v-if="banck == 'CIB3'">
+                <label for="CIB3_underline_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">التسطير</label>
+                <input type="text" name="CIB3_underline_cheque" id="CIB3_underline_cheque" class="form-control" v-model="CIB3_underline_cheque">
+            </div>
+            <div class="form-group mb-3 w-50"  v-if="banck == 'CIB3'">
+                <label for="currency_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">العملة</label>
+                <select id="currency_cheque" style="width:170px" class="form-control w-100" v-model="currency_cheque" @change="handleCurrencyChequeChange()">
+                    <option value="JOD" en_cur="Jordanian Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="فلس" cur_div2="Fils" cur_fr="1000" ar_cur="دينار اردني" ar_cur2="ديناراً أردنياً">دينار اردني</option>
+                    <option value="IQD" en_cur="Iraqi Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="فلس" cur_div2="Fils" cur_fr="1000" ar_cur="دينار عراقي" ar_cur2="ديناراً عراقياً">دينار عراقي</option>
+                    <option value="BHD" en_cur="Bahraini Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="فلس" cur_div2="Fils" cur_fr="1000" ar_cur="دينار بحريني" ar_cur2="ديناراً بحرينياً">دينار بحريني</option>
+                    <option value="KWD" en_cur="Kuwaiti Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="فلس" cur_div2="Fils" cur_fr="1000" ar_cur="دينار كويتي" ar_cur2="ديناراً كويتياً">دينار كويتي</option>
+                    <option value="LYD" en_cur="Libyan Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="درهم" cur_div2="dirham" cur_fr="1000" ar_cur="دينار ليبي" ar_cur2="ديناراً ليبياً">دينار ليبي</option>
+                    <option value="DZD" en_cur="Algerian Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="سنتيم" cur_div2="centime" cur_fr="100" ar_cur="دينار جزائري" ar_cur2="ديناراً جزائرياً">دينار جزائري</option>
+                    <option value="TND" en_cur="Tunisian Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="مليم" cur_div2="millime" cur_fr="1000" ar_cur="دينار تونسي" ar_cur2="ديناراً تونسياً">دينار تونسي</option>
+                    <option value="AED" en_cur="UAE Dirham" short_cur_en="Dirham" short_cur="درهم" cur_div="فلس" cur_div2="Fils" cur_fr="100" ar_cur="درهم إماراتي" ar_cur2="درهماً إماراتياً">درهم إماراتي</option>
+                    <option value="MAD" en_cur="Moroccan Dirham" short_cur_en="Dirham" short_cur="درهم" cur_div="سنتيم" cur_div2="centime" cur_fr="100" ar_cur="درهم مغربي" ar_cur2="درهماً مغربياً">درهم مغربي</option>
+                    <option value="SAR" en_cur="Saudi Riyal" short_cur_en="Riyal" short_cur="ريال" cur_div="هللة" cur_div2="halala" cur_fr="100" ar_cur="ريال سعودي" ar_cur2="ريالاً سعودياً">ريال سعودي</option>
+                    <option value="QAR" en_cur="Qatari Rial" short_cur_en="Riyal" short_cur="ريال" cur_div="درهم" cur_div2="dirham" cur_fr="100" ar_cur="ريال قطري" ar_cur2="ريالاً قطرياً">ريال قطري</option>
+                    <option value="YER" en_cur="Yemeni Rial" short_cur_en="Riyal" short_cur="ريال" cur_div="فلس" cur_div2="Fils" cur_fr="100" ar_cur="ريال يمني" ar_cur2="ريالاً يمنياً">ريال يمني</option>
+                    <option value="OMR" en_cur="Rial Omani" short_cur_en="Riyal" short_cur="ريال" cur_div="بيسة" cur_div2="baisa" cur_fr="1000" ar_cur="ريال عماني" ar_cur2="ريالاً عمانياً">ريال عماني</option>
+                    <option value="EGP" en_cur="Egyptian Pound" short_cur_en="Pound" short_cur="جنيه" cur_div="قرش" cur_div2="piasters" cur_fr="100" ar_cur="جنيه مصري" ar_cur2="جنيهاً مصرياً">جنيه مصري</option>
+                    <option value="SDG" en_cur="Sudanese Pound" short_cur_en="Pound" short_cur="جنيه" cur_div="قرش" cur_div2="piasters" cur_fr="100" ar_cur="جنيه سوداني" ar_cur2="جنيهاً سودانياً">جنيه سوداني</option>
+                    <option value="SYP" en_cur="Syrian Pound" short_cur_en="Pound" short_cur="ليرة" cur_div="قرش" cur_div2="piasters" cur_fr="100" ar_cur="ليرة سورية" ar_cur2="ليرة سورية">ليرة سورية</option>
+                    <option value="USD" en_cur="US Dollar" short_cur_en="Dollar" short_cur="دولار" cur_div="سنت" cur_div2="cent" cur_fr="100" ar_cur="دولار أمريكي" ar_cur2="دولاراً أمريكياً">دولار أمريكي</option>
+                    <option value="EUR" en_cur="Euro" short_cur_en="Euro" short_cur="يورو" cur_div="سنت" cur_div2="cent" cur_fr="100" ar_cur="يورو" ar_cur2="يورو">يورو</option>
+                    <option value="GBP" en_cur="GBP" short_cur_en="Pound" short_cur="باوند" cur_div="بنس" cur_div2="pence" cur_fr="100" ar_cur="جنيه استرليني" ar_cur2="جنيهاً إسترلينياً">جنيه استرليني</option>
+                    <option value="Fdj" en_cur="Fdj" short_cur_en="Franc" short_cur="فرنك" cur_div="سنتيم" cur_div2="centime" cur_fr="100" ar_cur="فرنك جيبوتي" ar_cur2="فرنكاً جيبوتياً">فرنك جيبوتي</option>
+                    <option value="CAD" en_cur="CA Dollar" short_cur_en="Dollar" short_cur="دولار" cur_div="سنت" cur_div2="cent" cur_fr="100" ar_cur="دولار كندي" ar_cur2="دولاراً كندياً">دولار كندي</option>
+                    <option value="PHP" en_cur="piso" short_cur_en="piso" short_cur="بيزو" cur_div="سنتيم" cur_div2="sentimo" cur_fr="100" ar_cur="بيزو فلبيني" ar_cur2="بيزو فلبيني">بيزو فلبيني</option>
+                    <option value="ILS" en_cur="Shekel" short_cur_en="Shekel" short_cur="شيقل" cur_div="أغورة" cur_div2="agura" cur_fr="100" ar_cur="شيقل" ar_cur2="شيقل">شيقل</option>
+                </select>
+            </div>
+        </div>
+        {{-- CIB3 Cheque  --}}
+        {{-- ################################################################  --}}
+
+        {{-- CIB2 Cheque  --}}
+        <div class="cheque_wrapper" id="cheque_wrapper" v-if="banck == 'CIB2'" id="CIB2" style="width: fit-content;margin: 2rem 0;border: 1px solid #dcdcdc; padding: 1rem; border-radius: 1rem">
+            <div class="cheque" style="position: relative;overflow: hidden; width: min-content;margin: auto">
+                <img src="{{asset('/imgs/CIB2_cheque.jpg')}}" alt="CIB2_cheque" style="width: 624px; max-width: 624px;">
+                <p class="name" style="position: absolute; top: 72px; right: 160px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 18px; margin: 0px; width: 410px; text-align: center;top: 1.9cm;width: 340px;">@{{ name }}</p>
+                <p class="date" dir="ltr" style="position: absolute; top: 19px;  z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 15px; margin: 0px; top: 1cm;left: 78px;width: 100px;">@{{ new Date(CIB2_cheque_date).getDate() + "-" +  (new Date(CIB2_cheque_date).getMonth() + 1) + "-" + new Date(CIB2_cheque_date).getFullYear()}}</p>
+                <p class="num_price" style="position: absolute; top: 124px;  z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 16px; margin: 0px; width: 100px; text-align: center;top: 3.2cm;left: 12.4cm;width: 115px;">#@{{ CIB2_price_num_cheque }}#</p>
+                <p class="currency" style="position: absolute; top: 122px; right: 162px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 14px; margin: 0px; width: 40px; text-align: center; background: rgba(255, 255, 255, 0.36) none repeat scroll 0% 0%;">@{{ currency_cheque }}</p>
+                <p class="text_price" v-if="CIB2_price_text_cheque"  style="position: absolute; top: 117px;  z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 12px; margin: 0px; width: 340px; text-align: center;left: 0.9cm;width: 325px;">فقط @{{ CIB2_price_text_cheque }} @{{ currency_cheque_text }} لا غير</p>
+                <p class="reason" style="position: absolute; top: 155px;  z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 12px; margin: 0px; width: 400px; text-align: center;left: 1cm;width: 315px;">@{{ CIB2_reason_cheque }} </p>
+                <p class="location" style="position: absolute; top: 169px; right: 40px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 13px; margin: 0px; width: 220px; text-align: center;">@{{ CIB2_location_cheque }} </p>
+                <p class="underline" v-if="CIB2_underline_cheque"  style="font-size: 12px; text-align: center; padding: 3px; border-top: 2px solid black; border-bottom: 2px solid black; z-index: 300; transform: rotate(-45deg); position: absolute; top: 80px; left: 0px; transform-origin: left top 0px; min-width: 120px; color: rgb(0, 0, 0); font-weight: 600;">@{{ CIB2_underline_cheque }} </p>
+            </div>
+        </div>
+        <div class="d-flex gap-2"  v-if="banck == 'CIB2'">
+            <div class="form-group mb-3 w-50"  v-if="banck == 'CIB2'">
+                <label for="CIB2_date_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">تاريخ الشيك</label>
+                <input type="date" name="CIB2_date_cheque" id="CIB2_date_cheque" class="form-control" v-model="CIB2_cheque_date">
+            </div>
+        </div>
+        <div class="d-flex gap-2" v-if="banck == 'CIB2'">
+            <div class="form-group mb-3 w-50"  v-if="banck == 'CIB2'">
+                <label for="CIB2_price_num_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">المبلغ بالارقام</label>
+                <input type="number" name="CIB2_price_num_cheque" id="CIB2_price_num_cheque" class="form-control" v-model="CIB2_price_num_cheque">
+            </div>
+            <div class="form-group mb-3 w-50"  v-if="banck == 'CIB2'">
+                <label for="CIB2_price_text_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">المبلغ بالاحرف</label>
+                <input type="text" name="CIB2_price_text_cheque" id="CIB2_price_text_cheque" class="form-control" v-model="CIB2_price_text_cheque">
+            </div>
+        </div>
+        <div class="d-flex gap-2" v-if="banck == 'CIB2'">
+            <div class="form-group mb-3 w-50"  v-if="banck == 'CIB2'">
+                <label for="CIB2_reason_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">وذلك لقاء</label>
+                <textarea name="CIB2_reason_cheque" id="CIB2_reason_cheque" class="form-control" v-model="CIB2_reason_cheque">
+                </textarea>
+            </div>
+            <div class="form-group mb-3 w-50"  v-if="banck == 'CIB2'">
+                <label for="CIB2_location_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px"> اسم موقع الشيك</label>
+                <input type="text" name="CIB2_location_cheque" id="CIB2_location_cheque" class="form-control" v-model="CIB2_location_cheque">
+            </div>
+        </div>
+
+        <div class="d-flex gap-2" v-if="banck == 'CIB2'">
+            <div class="form-group mb-3 w-50"  v-if="banck == 'CIB2'">
+                <label for="CIB2_underline_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">التسطير</label>
+                <input type="text" name="CIB2_underline_cheque" id="CIB2_underline_cheque" class="form-control" v-model="CIB2_underline_cheque">
+            </div>
+            <div class="form-group mb-3 w-50"  v-if="banck == 'CIB2'">
+                <label for="currency_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">العملة</label>
+                <select id="currency_cheque" style="width:170px" class="form-control w-100" v-model="currency_cheque" @change="handleCurrencyChequeChange()">
+                    <option value="JOD" en_cur="Jordanian Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="فلس" cur_div2="Fils" cur_fr="1000" ar_cur="دينار اردني" ar_cur2="ديناراً أردنياً">دينار اردني</option>
+                    <option value="IQD" en_cur="Iraqi Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="فلس" cur_div2="Fils" cur_fr="1000" ar_cur="دينار عراقي" ar_cur2="ديناراً عراقياً">دينار عراقي</option>
+                    <option value="BHD" en_cur="Bahraini Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="فلس" cur_div2="Fils" cur_fr="1000" ar_cur="دينار بحريني" ar_cur2="ديناراً بحرينياً">دينار بحريني</option>
+                    <option value="KWD" en_cur="Kuwaiti Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="فلس" cur_div2="Fils" cur_fr="1000" ar_cur="دينار كويتي" ar_cur2="ديناراً كويتياً">دينار كويتي</option>
+                    <option value="LYD" en_cur="Libyan Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="درهم" cur_div2="dirham" cur_fr="1000" ar_cur="دينار ليبي" ar_cur2="ديناراً ليبياً">دينار ليبي</option>
+                    <option value="DZD" en_cur="Algerian Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="سنتيم" cur_div2="centime" cur_fr="100" ar_cur="دينار جزائري" ar_cur2="ديناراً جزائرياً">دينار جزائري</option>
+                    <option value="TND" en_cur="Tunisian Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="مليم" cur_div2="millime" cur_fr="1000" ar_cur="دينار تونسي" ar_cur2="ديناراً تونسياً">دينار تونسي</option>
+                    <option value="AED" en_cur="UAE Dirham" short_cur_en="Dirham" short_cur="درهم" cur_div="فلس" cur_div2="Fils" cur_fr="100" ar_cur="درهم إماراتي" ar_cur2="درهماً إماراتياً">درهم إماراتي</option>
+                    <option value="MAD" en_cur="Moroccan Dirham" short_cur_en="Dirham" short_cur="درهم" cur_div="سنتيم" cur_div2="centime" cur_fr="100" ar_cur="درهم مغربي" ar_cur2="درهماً مغربياً">درهم مغربي</option>
+                    <option value="SAR" en_cur="Saudi Riyal" short_cur_en="Riyal" short_cur="ريال" cur_div="هللة" cur_div2="halala" cur_fr="100" ar_cur="ريال سعودي" ar_cur2="ريالاً سعودياً">ريال سعودي</option>
+                    <option value="QAR" en_cur="Qatari Rial" short_cur_en="Riyal" short_cur="ريال" cur_div="درهم" cur_div2="dirham" cur_fr="100" ar_cur="ريال قطري" ar_cur2="ريالاً قطرياً">ريال قطري</option>
+                    <option value="YER" en_cur="Yemeni Rial" short_cur_en="Riyal" short_cur="ريال" cur_div="فلس" cur_div2="Fils" cur_fr="100" ar_cur="ريال يمني" ar_cur2="ريالاً يمنياً">ريال يمني</option>
+                    <option value="OMR" en_cur="Rial Omani" short_cur_en="Riyal" short_cur="ريال" cur_div="بيسة" cur_div2="baisa" cur_fr="1000" ar_cur="ريال عماني" ar_cur2="ريالاً عمانياً">ريال عماني</option>
+                    <option value="EGP" en_cur="Egyptian Pound" short_cur_en="Pound" short_cur="جنيه" cur_div="قرش" cur_div2="piasters" cur_fr="100" ar_cur="جنيه مصري" ar_cur2="جنيهاً مصرياً">جنيه مصري</option>
+                    <option value="SDG" en_cur="Sudanese Pound" short_cur_en="Pound" short_cur="جنيه" cur_div="قرش" cur_div2="piasters" cur_fr="100" ar_cur="جنيه سوداني" ar_cur2="جنيهاً سودانياً">جنيه سوداني</option>
+                    <option value="SYP" en_cur="Syrian Pound" short_cur_en="Pound" short_cur="ليرة" cur_div="قرش" cur_div2="piasters" cur_fr="100" ar_cur="ليرة سورية" ar_cur2="ليرة سورية">ليرة سورية</option>
+                    <option value="USD" en_cur="US Dollar" short_cur_en="Dollar" short_cur="دولار" cur_div="سنت" cur_div2="cent" cur_fr="100" ar_cur="دولار أمريكي" ar_cur2="دولاراً أمريكياً">دولار أمريكي</option>
+                    <option value="EUR" en_cur="Euro" short_cur_en="Euro" short_cur="يورو" cur_div="سنت" cur_div2="cent" cur_fr="100" ar_cur="يورو" ar_cur2="يورو">يورو</option>
+                    <option value="GBP" en_cur="GBP" short_cur_en="Pound" short_cur="باوند" cur_div="بنس" cur_div2="pence" cur_fr="100" ar_cur="جنيه استرليني" ar_cur2="جنيهاً إسترلينياً">جنيه استرليني</option>
+                    <option value="Fdj" en_cur="Fdj" short_cur_en="Franc" short_cur="فرنك" cur_div="سنتيم" cur_div2="centime" cur_fr="100" ar_cur="فرنك جيبوتي" ar_cur2="فرنكاً جيبوتياً">فرنك جيبوتي</option>
+                    <option value="CAD" en_cur="CA Dollar" short_cur_en="Dollar" short_cur="دولار" cur_div="سنت" cur_div2="cent" cur_fr="100" ar_cur="دولار كندي" ar_cur2="دولاراً كندياً">دولار كندي</option>
+                    <option value="PHP" en_cur="piso" short_cur_en="piso" short_cur="بيزو" cur_div="سنتيم" cur_div2="sentimo" cur_fr="100" ar_cur="بيزو فلبيني" ar_cur2="بيزو فلبيني">بيزو فلبيني</option>
+                    <option value="ILS" en_cur="Shekel" short_cur_en="Shekel" short_cur="شيقل" cur_div="أغورة" cur_div2="agura" cur_fr="100" ar_cur="شيقل" ar_cur2="شيقل">شيقل</option>
+                </select>
+            </div>
+        </div>
+        {{-- CIB2 Cheque  --}}
+        {{-- ################################################################  --}}
+
+        {{-- QNB Cheque  --}}
+        <div class="cheque_wrapper" id="cheque_wrapper" v-if="banck == 'QNB'" id="QNB" style="width: fit-content;margin: 2rem 0;border: 1px solid #dcdcdc; padding: 1rem; border-radius: 1rem">
+            <div class="cheque" style="position: relative;overflow: hidden; width: min-content;margin: auto">
+                <img src="{{asset('/imgs/QNB_cheque.jpg')}}" alt="QNB_cheque" style="width: 624px; max-width: 624px;">
+                <p class="name" style="position: absolute; top: 94px; right: 100px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 18px; margin: 0px; width: 420px; text-align: center;">@{{ name }}</p>
+                <p class="date" dir="ltr" style="position: absolute; top: 47px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 15px; margin: 0px; right: 75px; ">@{{ new Date(QNB_cheque_date).getDate() + "-" +  (new Date(QNB_cheque_date).getMonth() + 1) + "-" + new Date(QNB_cheque_date).getFullYear()}}</p>
+                <p class="num_price" style="position: absolute; top: 140px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 16px; margin: 0px; width: 105px; text-align: center; right: 19px;">#@{{ QNB_price_num_cheque }}#</p>
+                <p class="currency" style="position: absolute; top: 142px; right: 125px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 15px; margin: 0px; width: 57px; text-align: center; background: rgba(255, 255, 255, 0.36) none repeat scroll 0% 0%;">@{{ currency_cheque }}</p>
+                <p class="text_price" v-if="QNB_price_text_cheque"  style="position: absolute; top: 140px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 12px; margin: 0px; width: 295px; text-align: center; right: 240px;">فقط @{{ QNB_price_text_cheque }} @{{ currency_cheque_text }} لا غير</p>
+                <p class="reason" style="position: absolute; top: 176px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 13px; margin: 0px; width: 385px; text-align: center; left: 1cm;">@{{ QNB_reason_cheque }} </p>
+                <p class="underline" v-if="QNB_underline_cheque"  style="font-size: 13px;text-align: center;padding: 4px;border-top: 2px solid black;border-bottom: 2px solid black;z-index: 300;transform: rotate(-45deg);position: absolute;top: 80px;left: 0;transform-origin: left top;min-width: 120px;font-size: 13px;color: #000;font-weight: 700;">@{{ QNB_underline_cheque }} </p>
+            </div>
+        </div>
+        <div class="d-flex gap-2"  v-if="banck == 'QNB'">
+            <div class="form-group mb-3 w-50"  v-if="banck == 'QNB'">
+                <label for="QNB_date_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">تاريخ الشيك</label>
+                <input type="date" name="QNB_date_cheque" id="QNB_date_cheque" class="form-control" v-model="QNB_cheque_date">
+            </div>
+            <div class="form-group mb-3 w-50"  v-if="banck == 'QNB'">
+                <label for="QNB_price_num_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">المبلغ بالارقام</label>
+                <input type="number" name="QNB_price_num_cheque" id="QNB_price_num_cheque" class="form-control" v-model="QNB_price_num_cheque">
+            </div>
+        </div>
+        <div class="d-flex gap-2" v-if="banck == 'QNB'">
+            <div class="form-group mb-3 w-50"  v-if="banck == 'QNB'">
+                <label for="QNB_price_text_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">المبلغ بالاحرف</label>
+                <input type="text" name="QNB_price_text_cheque" id="QNB_price_text_cheque" class="form-control" v-model="QNB_price_text_cheque">
+            </div>
+            <div class="form-group mb-3 w-50"  v-if="banck == 'QNB'">
+                <label for="QNB_reason_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">وذلك لقاء</label>
+                <textarea name="QNB_reason_cheque" id="QNB_reason_cheque" class="form-control" v-model="QNB_reason_cheque">
+                </textarea>
+            </div>
+        </div>
+
+        <div class="d-flex gap-2" v-if="banck == 'QNB'">
+            <div class="form-group mb-3 w-50"  v-if="banck == 'QNB'">
+                <label for="QNB_underline_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">التسطير</label>
+                <input type="text" name="QNB_underline_cheque" id="QNB_underline_cheque" class="form-control" v-model="QNB_underline_cheque">
+            </div>
+            <div class="form-group mb-3 w-50"  v-if="banck == 'QNB'">
+                <label for="currency_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">العملة</label>
+                <select id="currency_cheque" style="width:170px" class="form-control w-100" v-model="currency_cheque" @change="handleCurrencyChequeChange()">
+                    <option value="JOD" en_cur="Jordanian Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="فلس" cur_div2="Fils" cur_fr="1000" ar_cur="دينار اردني" ar_cur2="ديناراً أردنياً">دينار اردني</option>
+                    <option value="IQD" en_cur="Iraqi Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="فلس" cur_div2="Fils" cur_fr="1000" ar_cur="دينار عراقي" ar_cur2="ديناراً عراقياً">دينار عراقي</option>
+                    <option value="BHD" en_cur="Bahraini Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="فلس" cur_div2="Fils" cur_fr="1000" ar_cur="دينار بحريني" ar_cur2="ديناراً بحرينياً">دينار بحريني</option>
+                    <option value="KWD" en_cur="Kuwaiti Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="فلس" cur_div2="Fils" cur_fr="1000" ar_cur="دينار كويتي" ar_cur2="ديناراً كويتياً">دينار كويتي</option>
+                    <option value="LYD" en_cur="Libyan Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="درهم" cur_div2="dirham" cur_fr="1000" ar_cur="دينار ليبي" ar_cur2="ديناراً ليبياً">دينار ليبي</option>
+                    <option value="DZD" en_cur="Algerian Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="سنتيم" cur_div2="centime" cur_fr="100" ar_cur="دينار جزائري" ar_cur2="ديناراً جزائرياً">دينار جزائري</option>
+                    <option value="TND" en_cur="Tunisian Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="مليم" cur_div2="millime" cur_fr="1000" ar_cur="دينار تونسي" ar_cur2="ديناراً تونسياً">دينار تونسي</option>
+                    <option value="AED" en_cur="UAE Dirham" short_cur_en="Dirham" short_cur="درهم" cur_div="فلس" cur_div2="Fils" cur_fr="100" ar_cur="درهم إماراتي" ar_cur2="درهماً إماراتياً">درهم إماراتي</option>
+                    <option value="MAD" en_cur="Moroccan Dirham" short_cur_en="Dirham" short_cur="درهم" cur_div="سنتيم" cur_div2="centime" cur_fr="100" ar_cur="درهم مغربي" ar_cur2="درهماً مغربياً">درهم مغربي</option>
+                    <option value="SAR" en_cur="Saudi Riyal" short_cur_en="Riyal" short_cur="ريال" cur_div="هللة" cur_div2="halala" cur_fr="100" ar_cur="ريال سعودي" ar_cur2="ريالاً سعودياً">ريال سعودي</option>
+                    <option value="QAR" en_cur="Qatari Rial" short_cur_en="Riyal" short_cur="ريال" cur_div="درهم" cur_div2="dirham" cur_fr="100" ar_cur="ريال قطري" ar_cur2="ريالاً قطرياً">ريال قطري</option>
+                    <option value="YER" en_cur="Yemeni Rial" short_cur_en="Riyal" short_cur="ريال" cur_div="فلس" cur_div2="Fils" cur_fr="100" ar_cur="ريال يمني" ar_cur2="ريالاً يمنياً">ريال يمني</option>
+                    <option value="OMR" en_cur="Rial Omani" short_cur_en="Riyal" short_cur="ريال" cur_div="بيسة" cur_div2="baisa" cur_fr="1000" ar_cur="ريال عماني" ar_cur2="ريالاً عمانياً">ريال عماني</option>
+                    <option value="EGP" en_cur="Egyptian Pound" short_cur_en="Pound" short_cur="جنيه" cur_div="قرش" cur_div2="piasters" cur_fr="100" ar_cur="جنيه مصري" ar_cur2="جنيهاً مصرياً">جنيه مصري</option>
+                    <option value="SDG" en_cur="Sudanese Pound" short_cur_en="Pound" short_cur="جنيه" cur_div="قرش" cur_div2="piasters" cur_fr="100" ar_cur="جنيه سوداني" ar_cur2="جنيهاً سودانياً">جنيه سوداني</option>
+                    <option value="SYP" en_cur="Syrian Pound" short_cur_en="Pound" short_cur="ليرة" cur_div="قرش" cur_div2="piasters" cur_fr="100" ar_cur="ليرة سورية" ar_cur2="ليرة سورية">ليرة سورية</option>
+                    <option value="USD" en_cur="US Dollar" short_cur_en="Dollar" short_cur="دولار" cur_div="سنت" cur_div2="cent" cur_fr="100" ar_cur="دولار أمريكي" ar_cur2="دولاراً أمريكياً">دولار أمريكي</option>
+                    <option value="EUR" en_cur="Euro" short_cur_en="Euro" short_cur="يورو" cur_div="سنت" cur_div2="cent" cur_fr="100" ar_cur="يورو" ar_cur2="يورو">يورو</option>
+                    <option value="GBP" en_cur="GBP" short_cur_en="Pound" short_cur="باوند" cur_div="بنس" cur_div2="pence" cur_fr="100" ar_cur="جنيه استرليني" ar_cur2="جنيهاً إسترلينياً">جنيه استرليني</option>
+                    <option value="Fdj" en_cur="Fdj" short_cur_en="Franc" short_cur="فرنك" cur_div="سنتيم" cur_div2="centime" cur_fr="100" ar_cur="فرنك جيبوتي" ar_cur2="فرنكاً جيبوتياً">فرنك جيبوتي</option>
+                    <option value="CAD" en_cur="CA Dollar" short_cur_en="Dollar" short_cur="دولار" cur_div="سنت" cur_div2="cent" cur_fr="100" ar_cur="دولار كندي" ar_cur2="دولاراً كندياً">دولار كندي</option>
+                    <option value="PHP" en_cur="piso" short_cur_en="piso" short_cur="بيزو" cur_div="سنتيم" cur_div2="sentimo" cur_fr="100" ar_cur="بيزو فلبيني" ar_cur2="بيزو فلبيني">بيزو فلبيني</option>
+                    <option value="ILS" en_cur="Shekel" short_cur_en="Shekel" short_cur="شيقل" cur_div="أغورة" cur_div2="agura" cur_fr="100" ar_cur="شيقل" ar_cur2="شيقل">شيقل</option>
+                </select>
+            </div>
+        </div>
+        {{-- QNB Cheque  --}}
+        {{-- ################################################################  --}}
+
+        {{-- qnb3 Cheque  --}}
+        <div class="cheque_wrapper" id="cheque_wrapper" v-if="banck == 'qnb3'" id="qnb3" style="width: fit-content;margin: 2rem 0;border: 1px solid #dcdcdc; padding: 1rem; border-radius: 1rem">
+            <div class="cheque" style="position: relative;overflow: hidden; width: min-content;margin: auto">
+                <img src="{{asset('/imgs/qnb3_cheque.jpg')}}" alt="qnb3_cheque" style="width: 805px; max-width: 805px;">
+                <p class="name" style="position: absolute; top: 94px; right: 100px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 18px; margin: 0px; width: 420px; text-align: center;">@{{ name }}</p>
+                <p class="date" dir="ltr" style="position: absolute; top: 47px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 15px; margin: 0px; right: 75px; ">@{{ new Date(qnb3_cheque_date).getDate() + "-" +  (new Date(qnb3_cheque_date).getMonth() + 1) + "-" + new Date(qnb3_cheque_date).getFullYear()}}</p>
+                <p class="num_price" style="position: absolute; top: 140px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 16px; margin: 0px; width: 105px; text-align: center; right: 19px;">#@{{ qnb3_price_num_cheque }}#</p>
+                <p class="currency" style="position: absolute; top: 142px; right: 135px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 15px; margin: 0px; width: 57px; text-align: center; background: rgba(255, 255, 255, 0.36) none repeat scroll 0% 0%;">@{{ currency_cheque }}</p>
+                <p class="text_price" v-if="qnb3_price_text_cheque"  style="position: absolute; top: 140px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 12px; margin: 0px; width: 465px; text-align: center; right: 240px;">فقط @{{ qnb3_price_text_cheque }} @{{ currency_cheque_text }} لا غير</p>
+                <p class="reason" style="position: absolute; top: 176px; z-index: 999999; color: rgb(0, 0, 0); font-weight: 700; font-size: 13px; margin: 0px; width: 525px; text-align: center; left: 1cm;">@{{ qnb3_reason_cheque }} </p>
+                <p class="underline" v-if="qnb3_underline_cheque"  style="font-size: 13px;text-align: center;padding: 4px;border-top: 2px solid black;border-bottom: 2px solid black;z-index: 300;transform: rotate(-45deg);position: absolute;top: 80px;left: 0;transform-origin: left top;min-width: 120px;font-size: 13px;color: #000;font-weight: 700;">@{{ qnb3_underline_cheque }} </p>
+            </div>
+        </div>
+        <div class="d-flex gap-2"  v-if="banck == 'qnb3'">
+            <div class="form-group mb-3 w-50"  v-if="banck == 'qnb3'">
+                <label for="qnb3_date_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">تاريخ الشيك</label>
+                <input type="date" name="qnb3_date_cheque" id="qnb3_date_cheque" class="form-control" v-model="qnb3_cheque_date">
+            </div>
+            <div class="form-group mb-3 w-50"  v-if="banck == 'qnb3'">
+                <label for="qnb3_price_num_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">المبلغ بالارقام</label>
+                <input type="number" name="qnb3_price_num_cheque" id="qnb3_price_num_cheque" class="form-control" v-model="qnb3_price_num_cheque">
+            </div>
+        </div>
+        <div class="d-flex gap-2" v-if="banck == 'qnb3'">
+            <div class="form-group mb-3 w-50"  v-if="banck == 'qnb3'">
+                <label for="qnb3_price_text_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">المبلغ بالاحرف</label>
+                <input type="text" name="qnb3_price_text_cheque" id="qnb3_price_text_cheque" class="form-control" v-model="qnb3_price_text_cheque">
+            </div>
+            <div class="form-group mb-3 w-50"  v-if="banck == 'qnb3'">
+                <label for="qnb3_reason_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">وذلك لقاء</label>
+                <textarea name="qnb3_reason_cheque" id="qnb3_reason_cheque" class="form-control" v-model="qnb3_reason_cheque">
+                </textarea>
+            </div>
+        </div>
+
+        <div class="d-flex gap-2" v-if="banck == 'qnb3'">
+            <div class="form-group mb-3 w-50"  v-if="banck == 'qnb3'">
+                <label for="qnb3_underline_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">التسطير</label>
+                <input type="text" name="qnb3_underline_cheque" id="qnb3_underline_cheque" class="form-control" v-model="qnb3_underline_cheque">
+            </div>
+            <div class="form-group mb-3 w-50"  v-if="banck == 'qnb3'">
+                <label for="currency_cheque" class="label mb-2" style="font-weight: 600; font-size: 18px">العملة</label>
+                <select id="currency_cheque" style="width:170px" class="form-control w-100" v-model="currency_cheque" @change="handleCurrencyChequeChange()">
+                    <option value="JOD" en_cur="Jordanian Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="فلس" cur_div2="Fils" cur_fr="1000" ar_cur="دينار اردني" ar_cur2="ديناراً أردنياً">دينار اردني</option>
+                    <option value="IQD" en_cur="Iraqi Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="فلس" cur_div2="Fils" cur_fr="1000" ar_cur="دينار عراقي" ar_cur2="ديناراً عراقياً">دينار عراقي</option>
+                    <option value="BHD" en_cur="Bahraini Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="فلس" cur_div2="Fils" cur_fr="1000" ar_cur="دينار بحريني" ar_cur2="ديناراً بحرينياً">دينار بحريني</option>
+                    <option value="KWD" en_cur="Kuwaiti Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="فلس" cur_div2="Fils" cur_fr="1000" ar_cur="دينار كويتي" ar_cur2="ديناراً كويتياً">دينار كويتي</option>
+                    <option value="LYD" en_cur="Libyan Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="درهم" cur_div2="dirham" cur_fr="1000" ar_cur="دينار ليبي" ar_cur2="ديناراً ليبياً">دينار ليبي</option>
+                    <option value="DZD" en_cur="Algerian Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="سنتيم" cur_div2="centime" cur_fr="100" ar_cur="دينار جزائري" ar_cur2="ديناراً جزائرياً">دينار جزائري</option>
+                    <option value="TND" en_cur="Tunisian Dinar" short_cur_en="Dinar" short_cur="دينار" cur_div="مليم" cur_div2="millime" cur_fr="1000" ar_cur="دينار تونسي" ar_cur2="ديناراً تونسياً">دينار تونسي</option>
+                    <option value="AED" en_cur="UAE Dirham" short_cur_en="Dirham" short_cur="درهم" cur_div="فلس" cur_div2="Fils" cur_fr="100" ar_cur="درهم إماراتي" ar_cur2="درهماً إماراتياً">درهم إماراتي</option>
+                    <option value="MAD" en_cur="Moroccan Dirham" short_cur_en="Dirham" short_cur="درهم" cur_div="سنتيم" cur_div2="centime" cur_fr="100" ar_cur="درهم مغربي" ar_cur2="درهماً مغربياً">درهم مغربي</option>
+                    <option value="SAR" en_cur="Saudi Riyal" short_cur_en="Riyal" short_cur="ريال" cur_div="هللة" cur_div2="halala" cur_fr="100" ar_cur="ريال سعودي" ar_cur2="ريالاً سعودياً">ريال سعودي</option>
+                    <option value="QAR" en_cur="Qatari Rial" short_cur_en="Riyal" short_cur="ريال" cur_div="درهم" cur_div2="dirham" cur_fr="100" ar_cur="ريال قطري" ar_cur2="ريالاً قطرياً">ريال قطري</option>
+                    <option value="YER" en_cur="Yemeni Rial" short_cur_en="Riyal" short_cur="ريال" cur_div="فلس" cur_div2="Fils" cur_fr="100" ar_cur="ريال يمني" ar_cur2="ريالاً يمنياً">ريال يمني</option>
+                    <option value="OMR" en_cur="Rial Omani" short_cur_en="Riyal" short_cur="ريال" cur_div="بيسة" cur_div2="baisa" cur_fr="1000" ar_cur="ريال عماني" ar_cur2="ريالاً عمانياً">ريال عماني</option>
+                    <option value="EGP" en_cur="Egyptian Pound" short_cur_en="Pound" short_cur="جنيه" cur_div="قرش" cur_div2="piasters" cur_fr="100" ar_cur="جنيه مصري" ar_cur2="جنيهاً مصرياً">جنيه مصري</option>
+                    <option value="SDG" en_cur="Sudanese Pound" short_cur_en="Pound" short_cur="جنيه" cur_div="قرش" cur_div2="piasters" cur_fr="100" ar_cur="جنيه سوداني" ar_cur2="جنيهاً سودانياً">جنيه سوداني</option>
+                    <option value="SYP" en_cur="Syrian Pound" short_cur_en="Pound" short_cur="ليرة" cur_div="قرش" cur_div2="piasters" cur_fr="100" ar_cur="ليرة سورية" ar_cur2="ليرة سورية">ليرة سورية</option>
+                    <option value="USD" en_cur="US Dollar" short_cur_en="Dollar" short_cur="دولار" cur_div="سنت" cur_div2="cent" cur_fr="100" ar_cur="دولار أمريكي" ar_cur2="دولاراً أمريكياً">دولار أمريكي</option>
+                    <option value="EUR" en_cur="Euro" short_cur_en="Euro" short_cur="يورو" cur_div="سنت" cur_div2="cent" cur_fr="100" ar_cur="يورو" ar_cur2="يورو">يورو</option>
+                    <option value="GBP" en_cur="GBP" short_cur_en="Pound" short_cur="باوند" cur_div="بنس" cur_div2="pence" cur_fr="100" ar_cur="جنيه استرليني" ar_cur2="جنيهاً إسترلينياً">جنيه استرليني</option>
+                    <option value="Fdj" en_cur="Fdj" short_cur_en="Franc" short_cur="فرنك" cur_div="سنتيم" cur_div2="centime" cur_fr="100" ar_cur="فرنك جيبوتي" ar_cur2="فرنكاً جيبوتياً">فرنك جيبوتي</option>
+                    <option value="CAD" en_cur="CA Dollar" short_cur_en="Dollar" short_cur="دولار" cur_div="سنت" cur_div2="cent" cur_fr="100" ar_cur="دولار كندي" ar_cur2="دولاراً كندياً">دولار كندي</option>
+                    <option value="PHP" en_cur="piso" short_cur_en="piso" short_cur="بيزو" cur_div="سنتيم" cur_div2="sentimo" cur_fr="100" ar_cur="بيزو فلبيني" ar_cur2="بيزو فلبيني">بيزو فلبيني</option>
+                    <option value="ILS" en_cur="Shekel" short_cur_en="Shekel" short_cur="شيقل" cur_div="أغورة" cur_div2="agura" cur_fr="100" ar_cur="شيقل" ar_cur2="شيقل">شيقل</option>
+                </select>
+            </div>
+        </div>
+        {{-- qnb3 Cheque  --}}
+        {{-- ################################################################  --}}
+
+        <button class="btn btn-primary w-25 mb-5" @click="getChequeContent().then(() => {add()})">اضافة الشيك</button>
     </form>
 </div>
 @endsection
@@ -182,9 +566,10 @@
                 return {
                     id: "{{$Reprsentative->id}}",
                     name: "{{$Reprsentative->name}}",
-                    Cheque: null,
+                    cheque: null,
                     banck: 'NBE',
                     currency_cheque: "EGP",
+                    currency_cheque_text: "جنيه مصري",
 
                     // NBE
                     NBE_cheque_date: new Date().toISOString().split('T')[0],
@@ -194,60 +579,180 @@
                     NBE_reason_cheque: null,
                     NBE_location_cheque: null,
                     NBE_underline_cheque: null,
+
+                    // CIB
+                    CIB_cheque_date: new Date().toISOString().split('T')[0],
+                    CIB_price_num_cheque: null,
+                    CIB_price_text_cheque: null,
+                    CIB_reason_cheque: null,
+                    CIB_location_cheque: null,
+                    CIB_underline_cheque: null,
+
+                    // CIB3
+                    CIB3_cheque_date: new Date().toISOString().split('T')[0],
+                    CIB3_price_num_cheque: null,
+                    CIB3_price_text_cheque: null,
+                    CIB3_reason_cheque: null,
+                    CIB3_location_cheque: null,
+                    CIB3_underline_cheque: null,
+
+                    // CIB2
+                    CIB2_cheque_date: new Date().toISOString().split('T')[0],
+                    CIB2_price_num_cheque: null,
+                    CIB2_price_text_cheque: null,
+                    CIB2_reason_cheque: null,
+                    CIB2_location_cheque: null,
+                    CIB2_underline_cheque: null,
+
+                    // QNB
+                    QNB_cheque_date: new Date().toISOString().split('T')[0],
+                    QNB_price_num_cheque: null,
+                    QNB_price_text_cheque: null,
+                    QNB_reason_cheque: null,
+                    QNB_location_cheque: null,
+                    QNB_underline_cheque: null,
+
+                    // qnb3
+                    qnb3_cheque_date: new Date().toISOString().split('T')[0],
+                    qnb3_price_num_cheque: null,
+                    qnb3_price_text_cheque: null,
+                    qnb3_reason_cheque: null,
+                    qnb3_location_cheque: null,
+                    qnb3_underline_cheque: null,
                 }
             },
             methods: {
-            async add() {
-                $('.loader').fadeIn().css('display', 'flex')
-                    try {
-                        const response = await axios.post(`{{ route('cheque.put') }}`, {
-                            id: this.id,
-                            name: this.name,
-                            Cheque: this.Cheque
-                        });
-                        if (response.data.status === true) {
+                async add() {
+                    $('.loader').fadeIn().css('display', 'flex')
+                        try {
+                            const response = await axios.post(`{{ route('cheque.put') }}`, {
+                                id: this.id,
+                                name: this.name,
+                                cheque: this.cheque
+                            });
+                            if (response.data.status === true) {
+                                document.getElementById('errors').innerHTML = ''
+                                let error = document.createElement('div')
+                                error.classList = 'success'
+                                error.innerHTML = response.data.message
+                                document.getElementById('errors').append(error)
+                                $('#errors').fadeIn('slow')
+                                $('.loader').fadeOut()
+                                setTimeout(() => {
+                                    $('#errors').fadeOut('slow')
+                                    window.location.href = '/Cheque/' + response.data.data.id
+                                }, 2000);
+                            } else {
+                            $('.loader').fadeOut()
                             document.getElementById('errors').innerHTML = ''
-                            let error = document.createElement('div')
-                            error.classList = 'success'
-                            error.innerHTML = response.data.message
-                            document.getElementById('errors').append(error)
+                            $.each(response.data.errors, function (key, value) {
+                                let error = document.createElement('div')
+                                error.classList = 'error'
+                                error.innerHTML = value
+                                document.getElementById('errors').append(error)
+                            });
+                            $('#errors').fadeIn('slow')
+                            setTimeout(() => {
+                                $('input').css('outline', 'none')
+                                $('#errors').fadeOut('slow')
+                            }, 5000);
+                            }
+
+                        } catch (error) {
+                            document.getElementById('errors').innerHTML = ''
+                            let err = document.createElement('div')
+                            err.classList = 'error'
+                            err.innerHTML = 'server error try again later'
+                            document.getElementById('errors').append(err)
                             $('#errors').fadeIn('slow')
                             $('.loader').fadeOut()
+
                             setTimeout(() => {
-                                $('#errors').fadeOut('slow')
-                                window.location.href = '/Cheque/' + response.data.data.id
-                            }, 2000);
-                        } else {
-                        $('.loader').fadeOut()
-                        document.getElementById('errors').innerHTML = ''
-                        $.each(response.data.errors, function (key, value) {
-                            let error = document.createElement('div')
-                            error.classList = 'error'
-                            error.innerHTML = value
-                            document.getElementById('errors').append(error)
-                        });
-                        $('#errors').fadeIn('slow')
-                        setTimeout(() => {
-                            $('input').css('outline', 'none')
                             $('#errors').fadeOut('slow')
-                        }, 5000);
+                            }, 3500);
+
+                            console.error(error);
                         }
-
-                    } catch (error) {
-                        document.getElementById('errors').innerHTML = ''
-                        let err = document.createElement('div')
-                        err.classList = 'error'
-                        err.innerHTML = 'server error try again later'
-                        document.getElementById('errors').append(err)
-                        $('#errors').fadeIn('slow')
-                        $('.loader').fadeOut()
-
-                        setTimeout(() => {
-                        $('#errors').fadeOut('slow')
-                        }, 3500);
-
-                        console.error(error);
+                },
+                handleCurrencyChequeChange() {
+                    switch (this.currency_cheque) {
+                        case "JOD":
+                            this.currency_cheque_text = "دينار اردني";
+                            break;
+                        case "IQD":
+                            this.currency_cheque_text = "دينار عراقي";
+                            break;
+                        case "BHD":
+                            this.currency_cheque_text = "دينار بحريني";
+                            break;
+                        case "KWD":
+                            this.currency_cheque_text = "دينار كويتي";
+                            break;
+                        case "LYD":
+                            this.currency_cheque_text = "دينار ليبي";
+                            break;
+                        case "DZD":
+                            this.currency_cheque_text = "دينار جزائري";
+                            break;
+                        case "TND":
+                            this.currency_cheque_text = "دينار تونسي";
+                            break;
+                        case "AED":
+                            this.currency_cheque_text = "درهم إماراتي";
+                            break;
+                        case "MAD":
+                            this.currency_cheque_text = "درهم مغربي";
+                            break;
+                        case "SAR":
+                            this.currency_cheque_text = "ريال سعودي";
+                            break;
+                        case "QAR":
+                            this.currency_cheque_text = "ريال قطري";
+                            break;
+                        case "YER":
+                            this.currency_cheque_text = "ريال يمني";
+                            break;
+                        case "OMR":
+                            this.currency_cheque_text = "ريال عماني";
+                            break;
+                        case "EGP":
+                            this.currency_cheque_text = "جنيه مصري";
+                            break;
+                        case "SDG":
+                            this.currency_cheque_text = "جنيه سوداني";
+                            break;
+                        case "SYP":
+                            this.currency_cheque_text = "ليرة سورية";
+                            break;
+                        case "USD":
+                            this.currency_cheque_text = "دولار أمريكي";
+                            break;
+                        case "EUR":
+                            this.currency_cheque_text = "يورو";
+                            break;
+                        case "GBP":
+                            this.currency_cheque_text = "جنيه استرليني";
+                            break;
+                        case "Fdj":
+                            this.currency_cheque_text = "فرنك جيبوتي";
+                            break;
+                        case "CAD":
+                            this.currency_cheque_text = "دولار كندي";
+                            break;
+                        case "PHP":
+                            this.currency_cheque_text = "بيزو فلبيني";
+                            break;
+                        case "ILS":
+                            this.currency_cheque_text = "شيقل";
+                            break;
+                        default:
+                            this.currency_cheque_text = "";
+                            break;
                     }
+                },
+                async getChequeContent() {
+                    if (document.getElementById('cheque_wrapper') && document.getElementById('cheque_wrapper').innerHTML != '')
+                        this.cheque = document.getElementById('cheque_wrapper').innerHTML;
                 },
             },
             created() {

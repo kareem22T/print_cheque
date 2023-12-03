@@ -1,6 +1,6 @@
 <?php
 use App\Http\Controllers\ReprsentativeController;
-use App\Http\Controllers\CheckController;
+use App\Http\Controllers\ChequeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,11 +21,14 @@ Route::get('/add-reprsentative', function () {
 })->name('add.reprsentative');
 Route::post('/add-reprsentative', [ReprsentativeController::class, "put"])->name('reprsentative.put');
 Route::get('/reprsentatives', [ReprsentativeController::class, "index"])->name('reprsentative.prev');
+Route::get('/reprsentative/{id}', [ReprsentativeController::class, "prev"])->name('reprsentative.show');
 Route::get('/edit-reprsentative/{id}', [ReprsentativeController::class, "edit"])->name('reprsentative.edit');
 Route::post('/update-reprsentative', [ReprsentativeController::class, "update"])->name('reprsentative.update');
 Route::post('/get-reprsentative', [ReprsentativeController::class, "getReprsentatives"])->name('reprsentatives.get');
 Route::post('/search-reprsentative', [ReprsentativeController::class, "search"])->name('reprsentatives.search');
 Route::post('/delete-reprsentative', [ReprsentativeController::class, "delete"])->name('reprsentatives.delete');
 
-Route::get('/add-cheque/{id}', [CheckController::class, "add"])->name('cheque.add');
-Route::post('/add-cheque', [CheckController::class, "put"])->name('cheque.put');
+Route::get('/add-cheque/{id}', [ChequeController::class, "add"])->name('cheque.add');
+Route::post('/add-cheque', [ChequeController::class, "put"])->name('cheque.put');
+Route::get('/Cheque/{id}', [ChequeController::class, "prev"])->name('cheque.prev');
+Route::post('/delete-cheque', [ChequeController::class, "delete"])->name('cheque.delete');

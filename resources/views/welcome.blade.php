@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
     <script src="{{ asset('js/bootrsrap.js') }}"></script>
-    <title>Print Check</title>
+    <title>Print Cheque</title>
 </head>
 <body dir="rtl">
     <div class="container d-flex justify-content-center align-items-center gap-3" style="height: 100vh">

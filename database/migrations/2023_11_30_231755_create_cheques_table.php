@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('checks', function (Blueprint $table) {
+        Schema::create('cheques', function (Blueprint $table) {
             $table->id();
-            $table->integar('reprsentative_id');
-            $table->longText('check');
+            $table->integer('reprsentative_id');
+            $table->longText('cheque');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('checks');
+        Schema::dropIfExists('cheques');
     }
 };

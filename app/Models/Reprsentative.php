@@ -15,4 +15,10 @@ class Reprsentative extends Model
        'email',
        'additional_notes',
     ];
+
+    public function cheques()
+    {
+        return $this->hasMany('App\Models\Cheque', 'reprsentative_id');
+    }
+
 }

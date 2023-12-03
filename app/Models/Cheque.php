@@ -5,12 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Check extends Model
+class Cheque extends Model
 {
     use HasFactory;
     protected $fillable = [
         "id",
         'reprsentative_id',
-        'check',
+        'cheque',
     ];
+
+    public function reprsentative()
+    {
+        return $this->belongsTo('App\Models\Reprsentative', 'reprsentative_id');
+    }
+
 }

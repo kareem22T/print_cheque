@@ -176,8 +176,9 @@
     <div class="custom-loader"></div>
   </div>
   <!--  Body Wrapper -->
-    <!-- Sidebar Start -->
-    <div class="container mt-5">
+  <!-- Sidebar Start -->
+  <div class="container mt-5">
+      <a href="/" class="text-left mt-2 w-100 d-flex justify-content-end">الرجوع الي القائمة الرئيسية</a>
       @yield('content')
     </div>
   <script src="{{ asset('/dashboard/libs/jquery/dist/jquery.min.js') }}"></script>

@@ -1,5 +1,5 @@
 @extends('admin.layouts.admin-layout')
-@section('title', 'Print Check | Add reprsentative')
+@section('title', 'Print Cheque | Add reprsentative')
 @section('content')
 <h1>
     اضافة مندوب
@@ -8,20 +8,20 @@
 <form action="" class="w-100 mt-3" @submit.prevent>
     <div class="form-group w-100 mb-4">
         <label for="name" class="label mb-2">اسم المندوب *</label>
-        <input type="text" name="name" id="name" class="form-control" placeholder="اسم المندوب *" v-model="name">
+        <input type="text" name="name" id="name" class="form-control" v-model="name">
     </div>
     <h2 class="mb-2">بيانات اضافية</h2>
     <div class="form-group w-100 mb-3">
         <label for="phone" class="label mb-2">رقم هاتف المندوب</label>
-        <input type="text" name="phone" id="phone" class="form-control" placeholder="رقم هاتف المندوب" v-model="phone">
+        <input type="text" name="phone" id="phone" class="form-control" v-model="phone">
     </div>
     <div class="form-group w-100 mb-3">
         <label for="email" class="label mb-2">البريد الالكتروني المندوب</label>
-        <input type="text" name="email" id="email" class="form-control" placeholder="البريد الالكتروني المندوب" v-model="email">
+        <input type="text" name="email" id="email" class="form-control"  v-model="email">
     </div>
     <div class="form-group w-100 mb-3">
         <label for="additional_notes" class="label mb-2">ملاحظات اضافية عن المندوب</label>
-        <textarea type="text" name="additional_notes" id="additional_notes" class="form-control" placeholder="ملاحظات اضافية عن المندوب" v-model="additional_notes">
+        <textarea type="text" name="additional_notes" id="additional_notes" class="form-control"  v-model="additional_notes">
         </textarea>
     </div>
     <button class="btn btn-primary w-25" @click="add()">اضافة المندوب</button>
