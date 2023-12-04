@@ -37,7 +37,7 @@
 <div class="card w-100" id="word_prev">
     <div class="card-header d-flex justify-content-between gap-3">
         <h4>كل الشيكات المضافة ل{{ $Reprsentative->name }}</h4>
-        <a href="add-cheque/{{ $Reprsentative->id }}" class="btn btn-primary w-fit d-flex gap-2 align-items-center">
+        <a href="/sys/add-cheque/{{ $Reprsentative->id }}" class="btn btn-primary w-fit d-flex gap-2 align-items-center">
             <i class="ti ti-plus"></i> تحرير شيك ل{{ $Reprsentative->name }}
         </a>
     </div>
@@ -62,7 +62,7 @@
                 <td class="border-bottom-0"><h6 class="fw-semibold mb-0">{{$cheque->created_at}}</h6></td>
                 <td class="border-bottom-0">
                     <div class="d-flex gap-2">
-                        <a href="/Cheque/{{$cheque->id}}" target="_blanck" class="btn btn-success p-2 d-flex gap-2" style="margin: auto"><h4 class="ti ti-eye text-light m-0 fw-semibold"></h4> عرض الشيك</a>
+                        <a href="/sys/Cheque/{{$cheque->id}}" target="_blanck" class="btn btn-success p-2 d-flex gap-2" style="margin: auto"><h4 class="ti ti-eye text-light m-0 fw-semibold"></h4> عرض الشيك</a>
                     </div>
                 </td>
             </tr>

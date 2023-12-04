@@ -57,7 +57,7 @@
                 $('.loader').fadeOut()
                 setTimeout(() => {
                     $('#errors').fadeOut('slow')
-                    window.location.href = '/'
+                    window.location.href = '/sys'
                 }, 2000);
             } else {
                 $('.loader').fadeOut()

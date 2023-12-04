@@ -63,7 +63,7 @@
                             $('.loader').fadeOut()
                             setTimeout(() => {
                                 $('#errors').fadeOut('slow')
-                                window.location.href = '/add-cheque/' + response.data.data.id
+                                window.location.href = '/sys/add-cheque/' + response.data.data.id
                             }, 2000);
                         } else {
                         $('.loader').fadeOut()

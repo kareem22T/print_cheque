@@ -54,15 +54,15 @@
                 <td class="border-bottom-0"><h6 class="fw-semibold mb-0">@{{reprsentative.email}}</h6></td>
                 <td class="border-bottom-0">
                     <div class="d-flex gap-2">
-                        <a :href="`/add-cheque/${reprsentative.id}`" class="btn btn-dark p-2" style="position: relative;">
+                        <a :href="`/sys/add-cheque/${reprsentative.id}`" class="btn btn-dark p-2" style="position: relative;">
                             <h4 class="ti ti-script-plus text-light m-0 fw-semibold"></h4>
                             <span class="hint" style="display:none;position: absolute;bottom: 120%;background: #8a8a8a;padding: 5px 10px;right: 50%;transform: translateX(50%);border-radius: 5px;z-index: 9999999999;">تحرير شيك</span>
                         </a>
-                        <a :href="`/edit-reprsentative/${reprsentative.id}`" class="btn btn-secondary p-2" style="position: relative;">
+                        <a :href="`/sys/edit-reprsentative/${reprsentative.id}`" class="btn btn-secondary p-2" style="position: relative;">
                             <h4 class="ti ti-edit text-light m-0 fw-semibold"></h4>
                             <span class="hint" style="display:none;position: absolute;bottom: 120%;background: #8a8a8a;padding: 5px 10px;right: 50%;transform: translateX(50%);border-radius: 5px;z-index: 9999999999;">تعديل بيانات المندوب</span>
                         </a>
-                        <a :href="`/reprsentative/${reprsentative.id}`" target="_blanck" class="btn btn-success p-2" style="position: relative;">
+                        <a :href="`/sys/reprsentative/${reprsentative.id}`" target="_blanck" class="btn btn-success p-2" style="position: relative;">
                             <h4 class="ti ti-eye text-light m-0 fw-semibold"></h4>
                             <span class="hint" style="display:none;position: absolute;bottom: 120%;background: #8a8a8a;padding: 5px 10px;right: 50%;transform: translateX(50%);border-radius: 5px;z-index: 9999999999;">عرض سجل المندوب</span>
                         </a>
