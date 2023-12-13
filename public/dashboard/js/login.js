@@ -11,7 +11,7 @@ createApp({
         async login(email, password) {
             $('.loader').fadeIn().css('display', 'flex')
             try {
-                const response = await axios.post(`/admin/login`, {
+                const response = await axios.post(`/sys/admin/login`, {
                     email: email,
                     password: password,
                 },
