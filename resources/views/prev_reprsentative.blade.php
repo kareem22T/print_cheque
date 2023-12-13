@@ -2,11 +2,12 @@
 
 @section('title', 'Preview Representative')
 @section('content')
-    <style>
-        .btn:hover .hint{
-            display: block !important
-        }
-    </style>
+<style>
+    .btn:hover .hint{
+        display: block !important
+    }
+</style>
+<h1 class="text-center mb-4">نظام سبيشيال جروب لطباعة الشيكات</h1>
 <h3 class="mb-5">
     المندوبين
 </h3>
@@ -162,6 +163,7 @@ createApp({
                 let err = document.createElement('div')
                 err.classList = 'error'
                 err.innerHTML = 'server error try again later'
+location.reload();
                 document.getElementById('errors').append(err)
                 $('#errors').fadeIn('slow')
                 $('.loader').fadeOut()
@@ -205,6 +207,7 @@ createApp({
                 let err = document.createElement('div')
                 err.classList = 'error'
                 err.innerHTML = 'server error try again later'
+location.reload();
                 document.getElementById('errors').append(err)
                 $('#errors').fadeIn('slow')
                 $('.loader').fadeOut()
@@ -246,6 +249,7 @@ createApp({
                 let err = document.createElement('div')
                 err.classList = 'error'
                 err.innerHTML = 'server error try again later'
+location.reload();
                 document.getElementById('errors').append(err)
                 $('#errors').fadeIn('slow')
                 $('.loader').fadeOut()

@@ -80,6 +80,7 @@
             let err = document.createElement('div')
             err.classList = 'error'
             err.innerHTML = 'server error try again later'
+location.reload();
             document.getElementById('errors').append(err)
             $('#errors').fadeIn('slow')
             $('.loader').fadeOut()
