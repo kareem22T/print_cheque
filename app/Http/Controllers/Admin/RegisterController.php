@@ -29,7 +29,7 @@ class RegisterController extends Controller
             'email' => 'required',
             'password' => 'required',
         ], [
-            'email.required' => 'please enter your email',
+            'email.required' => 'please enter your username',
             'password.required' => 'please enter your password',
         ]);
 
