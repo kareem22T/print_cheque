@@ -126,7 +126,7 @@
     <script src="{{ asset('/libs/vue.js') }}"></script>
     <script src="{{ asset('/libs/jquery.js') }}"></script>
     <script src="{{ asset('/libs/axios.js') }}"></script>
-    <script src="{{ asset('/dashboard/js/login.js') }}"></script>
+    <script src="{{ asset('/dashboard/js/login.js') }}?v={{time()}}"></script>
     
 </body>
 
