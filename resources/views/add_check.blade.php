@@ -1828,7 +1828,10 @@
         </div>
         {{-- NBD4 Cheque  --}}
         {{-- ################################################################  --}}
-
+        <div class="form-group mb-3 w-100">
+            <label for="notes" class="label mb-2" style="font-weight: 600; font-size: 18px;">ملاحظات</label>
+            <textarea name="notes" id="notes" class="form-control" v-model="notes"></textarea>
+        </div>
         <button class="btn btn-primary w-25 mb-5" @click="getChequeContent().then(() => {add()})">اضافة الشيك</button>
     </form>
 </div>
@@ -1844,6 +1847,7 @@
                     id: "{{$Reprsentative->id}}",
                     name: "{{$Reprsentative->name}}",
                     cheque: null,
+                    notes: null,
                     banck: 'NBE',
                     currency_cheque: "EGP",
                     currency_cheque_text: "جنيه مصري",
@@ -2064,6 +2068,7 @@
                             const response = await axios.post(`{{ route('cheque.put') }}`, {
                                 id: this.id,
                                 name: this.name,
+                                notes: this.notes,
                                 cheque: this.cheque
                             });
                             if (response.data.status === true) {

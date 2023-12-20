@@ -23,6 +23,10 @@
             </div>
         </div>
     </div>
+    <div class="notes">
+        <h3 style="text-align: center;margin-top: 2rem;">ملحوظات</h3>
+        <p style="text-align: center">{{ $Cheque->notes }}</p>
+    </div>
 </div>
 @endsection
 
@@ -30,15 +34,22 @@
 <script>
     $('.loader').fadeOut()
     function printChecque() {
-        var content = document.getElementById('cheque').innerHTML;
-
+        
+        // Set the innerHTML of the temporary div to your content
+        
+        // Find all img elements that are children of the parent element
         var originalContent = document.body.innerHTML;
-
-        document.body.innerHTML = content;
-
-        window.print();
-
-        document.body.innerHTML = originalContent;
+        $('#cheque img').css("opacity", 0)
+        var content = document.getElementById('cheque').innerHTML;
+        setTimeout(() => {            
+    
+            document.body.innerHTML = content;
+    
+            window.print();
+    
+            document.body.innerHTML = originalContent;
+            // $('#cheque img').css("opacity", 1);
+        }, 500);
     }
     async function deleteCheque() {
         $('.loader').fadeIn().css('display', 'flex')

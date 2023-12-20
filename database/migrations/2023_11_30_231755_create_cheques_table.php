@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('reprsentative_id');
             $table->longText('cheque');
+            $table->longText('notes')->nullable();
             $table->timestamps();
         });
     }

@@ -10,6 +10,7 @@ class Cheque extends Model
     use HasFactory;
     protected $fillable = [
         "id",
+        "notes",
         'reprsentative_id',
         'cheque',
     ];

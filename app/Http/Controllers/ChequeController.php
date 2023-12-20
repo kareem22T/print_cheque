@@ -39,6 +39,7 @@ class ChequeController extends Controller
         $createCheck = Cheque::create([
             'reprsentative_id' => $request->id,
             'name' => $request->name,
+            'notes' => $request->notes,
             'cheque' => $request->cheque,
         ]);
 
