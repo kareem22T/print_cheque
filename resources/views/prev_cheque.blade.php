@@ -23,10 +23,12 @@
             </div>
         </div>
     </div>
+    @if ($Cheque->notes)
     <div class="notes">
         <h3 style="text-align: center;margin-top: 2rem;">ملحوظات</h3>
         <p style="text-align: center">{{ $Cheque->notes }}</p>
     </div>
+    @endif
 </div>
 @endsection
 
