@@ -26,7 +26,7 @@ createApp({
                     setTimeout(() => {
                         $('.loader').fadeOut()
                         $('#errors').fadeOut('slow')
-                        window.location.href = '/sys'
+                        window.location.href = '/'
                     }, 1300);
                 } else {
                     $('.loader').fadeOut()
